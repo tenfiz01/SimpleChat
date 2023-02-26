@@ -36,8 +36,8 @@ public:
     std::mutex mtx;
     
     void close_client_connection(int user_id);
-    void message_broadcaster(std::string message, int sender_id);
-    void client_handler(const int &client_socket, int user_id);
+    void message_broadcaster(const std::string &message, int sender_id);
+    void client_handler(int client_socket, int user_id);
 };
 
 class Session {

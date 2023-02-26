@@ -12,7 +12,7 @@ void Server::close_client_connection(int user_id) {
     }
 }
 
-void Server::message_broadcaster(std::string message, int sender_id) {
+void Server::message_broadcaster(const std::string &message, int sender_id) {
     for (const auto& client : clients) {
         if (client.user_id != sender_id) {
             if ((send(client.socket, message.c_str(), message.size(), 0)) == -1) { 
@@ -22,7 +22,7 @@ void Server::message_broadcaster(std::string message, int sender_id) {
     }
 }
 
-void Server::client_handler(const int &client_socket, int user_id) {
+void Server::client_handler(int client_socket, int user_id) {
     std::array<char, BUFSIZE> buffer;
     std::string message;
 
