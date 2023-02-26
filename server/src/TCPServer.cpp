@@ -5,6 +5,7 @@ void Server::close_client_connection(int user_id) {
     std::lock_guard<std::mutex> guard(mtx);
     auto it = std::remove_if(clients.begin(), clients.end(),
         [user_id](const auto& client) { return client.user_id == user_id; });
+    // If "it" is not equal to clients.end() then at least one element has been deleted
     if (it != clients.end()) {
         it->thread.detach();
         close(it->socket);
